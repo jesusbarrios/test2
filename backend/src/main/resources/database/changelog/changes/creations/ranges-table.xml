@@ -6,17 +6,28 @@
 	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd
     http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
 
-	<changeSet author="Victor Ciceia" id="1">
-		<createTable tableName="roles">
+	<changeSet author="Victor Ciceia" id="9">
+		<createTable tableName="ranges">
 			<column autoIncrement="true" name="id" type="INT">
 				<constraints primaryKey="true" />
 			</column>
-			<column name="authority" type="VARCHAR(100)">
+			<column name="imageId" type="INT">
+				<constraints nullable="false"
+					foreignKeyName="fkRangeImage" referencedTableName="images"
+					referencedColumnNames="id" />
+			</column>
+			<column name="title" type="VARCHAR(255)">
+				<constraints nullable="false" />
+			</column>
+			<column name="description" type="VARCHAR(255)">
+				<constraints nullable="true" />
+			</column>
+			<column name="deleted" type="BOOL" defaultValue="false">
 				<constraints nullable="false" />
 			</column>
 		</createTable>
 		<rollback>
-			<dropTable tableName="roles" />
+			<dropTable tableName="ranges" />
 		</rollback>
 	</changeSet>
 
